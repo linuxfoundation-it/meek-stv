@@ -59,6 +59,7 @@ type meekStvRound struct {
 	n           int
 	candidates  Candidates
 	omega       float64
+	threshold   float64
 	prevSurplus float64
 }
 
@@ -72,11 +73,12 @@ func (round *meekStvRound) run(el *election.Election) {
 	// add w multiplied by the keep factor kf of the candidate (to 9 decimal places, rounded up)
 	// to that candidate’s vote v, and reduce w by the same amount, until no further candidate remains
 	// on the ballot or until the ballot’s weight w is 0.
+
+	exhausted := 0.0
 	for _, bl := range el.Ballots {
-		w := float64(0.0)
+		w := float64(bl.Weight)
 		for i := 0; i < len(bl.Preferences); i++ {
 			c := round.candidates[bl.Preferences[i]]
-			w = float64(bl.Weight)
 			v := w * c.KeepFactor
 			c.Votes += v
 			w -= v
@@ -84,7 +86,15 @@ func (round *meekStvRound) run(el *election.Election) {
 				break
 			}
 		}
+		if w > 0.0 {
+			exhausted += w
+		}
 	}
+	// fmt.Println("vote counts")
+	// for _, c := range round.candidates {
+	// 	fmt.Println(c.Name, c.Votes)
+	// }
+	// fmt.Println("<exhausted>", exhausted)
 
 	// Update quota. Set quota q to the sum of the vote v for all candidates (step B.2.a),
 	// divided by one more than the number of seats to be filled,
@@ -93,24 +103,19 @@ func (round *meekStvRound) run(el *election.Election) {
 	totvotes := round.candidates.countVotes()
 	threshold := totvotes / (1.0 + float64(el.Seats) - float64(elected))
 	fmt.Printf("threshold %.02f (%.02f)\n", threshold, threshold/totvotes*100)
+	round.threshold = threshold
 
 	// Find winners. Elect each hopeful candidate with a vote v greater than or equal to the quota (v ≥ q).
 	for _, c := range round.candidates {
-		if c.Votes >= threshold {
+		if c.Votes >= round.threshold {
 			c.State = Elected
-			// c.KeepFactor = (c.KeepFactor * threshold) / c.Votes
 			newlyElected = true
 			fmt.Printf("elected %s with %.02f votes\n", c.Name, c.Votes)
-		}
-	}
 
-	// Update keep factors. Set the keep factor kf of each elected candidate to the candidate’s
-	// current keep factor kf, multiplied by the current quota q (to 9 decimal places, rounded up),
-	// and then divided by the candidate’s current vote v (to 9 decimal places, rounded up).
-	// Continue iteration at step B.2.a.
-	for _, c := range round.candidates {
-		if c.State == Elected {
-			c.KeepFactor = (c.KeepFactor * threshold) / c.Votes
+			// Update keep factors. Set the keep factor kf of each elected candidate to the candidate’s
+			// current keep factor kf, multiplied by the current quota q (to 9 decimal places, rounded up),
+			// and then divided by the candidate’s current vote v (to 9 decimal places, rounded up).
+			c.KeepFactor = (c.KeepFactor * round.threshold) / c.Votes
 		}
 	}
 
@@ -118,7 +123,7 @@ func (round *meekStvRound) run(el *election.Election) {
 	// but not less than 0.
 	totSurplus := 0.0
 	for _, c := range round.candidates {
-		c.Surplus = math.Max(c.Votes-threshold, 0.0)
+		c.Surplus = math.Max(c.Votes-round.threshold, 0.0)
 		totSurplus += c.Surplus
 	}
 
@@ -131,14 +136,13 @@ func (round *meekStvRound) run(el *election.Election) {
 	// Otherwise, if the total surplus s is less than omega, or (except for the first iteration)
 	// if the total surplus s is greater than or equal to the surplus s in the previous iteration, continue at B.3.
 	if totSurplus < round.omega || (round.n > 0 && totSurplus >= round.prevSurplus) {
-		goto defeatCandidates
+		// continue
 	}
 
 	// Defeat low candidate.
 	// Defeat the hopeful candidate c with the lowest vote v, breaking any tie per procedure T,
 	// where each candidate c' is tied with c if vote v' for c' is less than or equal to v plus total surplus s.
 	// Set the keep factor kf of c to 0.
-defeatCandidates:
 	var d = &Candidate{Votes: math.MaxFloat64}
 	for _, c := range round.candidates {
 		if c.State == Hopeful && c.Votes < d.Votes {
