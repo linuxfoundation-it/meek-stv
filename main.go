@@ -5,8 +5,8 @@ import (
 	"os"
 	"sort"
 
-	"example.com/election"
-	"example.com/meekstv"
+	"github.com/blackgreen100/meek-stv/election"
+	"github.com/blackgreen100/meek-stv/meekstv"
 )
 
 func main() {

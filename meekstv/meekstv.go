@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"math"
 
-	"example.com/election"
+	"github.com/blackgreen100/meek-stv/election"
 )
 
 func Count(params *election.Election) Candidates {
