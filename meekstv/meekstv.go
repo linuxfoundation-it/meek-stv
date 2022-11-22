@@ -90,6 +90,7 @@ func (round *meekStvRound) run(el *election.Election) {
 			exhausted += w
 		}
 	}
+	// TODO add debug statements
 	// fmt.Println("vote counts")
 	// for _, c := range round.candidates {
 	// 	fmt.Println(c.Name, c.Votes)
@@ -157,6 +158,7 @@ func (round *meekStvRound) run(el *election.Election) {
 	round.prevSurplus = totSurplus
 }
 
+// TODO
 // tiebreaking
 // Ties can arise in B.3, when selecting a candidate for defeat.
 // Use the defined tiebreaking procedure to select for defeat one candidate from the group of tied candidates.

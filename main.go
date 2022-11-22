@@ -15,13 +15,15 @@ func main() {
 		panic(err)
 	}
 
-	elected := meekstv.Count(election.Read(f))
+	data := election.Read(f)
+	elected := meekstv.Count(data)
 
 	sort.Slice(elected, func(i, j int) bool {
 		return elected[i].Votes >= elected[j].Votes
 	})
 
 	fmt.Println("-------------------------")
+	fmt.Printf("Results of %s\n", data.Title)
 	for _, e := range elected {
 		if e.State == meekstv.Elected {
 			fmt.Printf("%s is elected with %.02f votes\n", e.Name, e.Votes)
