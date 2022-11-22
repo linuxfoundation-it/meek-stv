@@ -22,7 +22,11 @@ scanner:
 			election.Candidates, election.Seats = parseHeader(t)
 
 		case 1:
-			election.Withdrawn = parseWithdrawn(t)
+			if strings.HasPrefix(t, "-") {
+				election.Withdrawn = parseWithdrawn(t)
+				continue
+			}
+			fallthrough
 
 		default:
 			if t == "0" {
