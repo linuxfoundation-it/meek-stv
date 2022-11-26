@@ -51,7 +51,7 @@ func assertAll(t *testing.T, want *OpaVoteJSONReport, got Log) {
 		for i, votes := range wantRound.Count {
 			assert.InDelta(t, float64(votes)/omega, gotRound.CandidateSnapshot[i].Votes, 0.01)
 		}
-		assert.InDelta(t, float64(wantRound.Exhausted)/omega, gotRound.Exhausted, 388.01) // 388 empty ballots
+		assert.InDelta(t, float64(wantRound.Exhausted)/omega, gotRound.Exhausted, 0.01)
 	}
 }
 

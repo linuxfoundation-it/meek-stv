@@ -72,7 +72,7 @@ type meekStvRound struct {
 	report      Log
 }
 
-func (round *meekStvRound) run(el *election.Election) {
+func (round *meekStvRound) run(input *election.Election) {
 	newlyElected := false
 
 	round.candidates.resetVotes()
@@ -84,7 +84,7 @@ func (round *meekStvRound) run(el *election.Election) {
 	// on the ballot or until the ballot’s weight w is 0.
 
 	exhausted := 0.0
-	for _, bl := range el.Ballots {
+	for _, bl := range input.Ballots {
 		w := float64(bl.Weight)
 		for i := 0; i < len(bl.Preferences); i++ {
 			c := round.candidates[bl.Preferences[i]]
@@ -100,7 +100,7 @@ func (round *meekStvRound) run(el *election.Election) {
 		}
 	}
 	entry := round.report.last()
-	entry.Exhausted = exhausted
+	entry.Exhausted = exhausted - float64(input.CountEmpty())
 
 	// TODO add debug statements
 	// fmt.Println("vote counts")
@@ -114,7 +114,7 @@ func (round *meekStvRound) run(el *election.Election) {
 	// truncated to 9 decimal places, plus 0.000000001 (1/109).
 	// elected := round.candidates.countState(Elected)
 	totvotes := round.candidates.countVotes()
-	threshold := totvotes / (1.0 + float64(el.Seats))
+	threshold := totvotes / (1.0 + float64(input.Seats))
 	fmt.Printf("threshold %.02f (%.02f)\n", threshold, threshold/totvotes*100)
 	round.threshold = threshold
 	entry.Threshold = threshold
