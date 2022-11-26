@@ -1,3 +1,5 @@
+![Build Status](https://github.com/blackgreen100/meek-stv/actions/workflows/go.yml/badge.svg)
+
 ### Description
 
 This repository contains an implementation of MeekSTV vote counting algorithm, 
