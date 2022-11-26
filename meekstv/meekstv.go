@@ -100,9 +100,9 @@ func (round *meekStvRound) run(el *election.Election) {
 	// Update quota. Set quota q to the sum of the vote v for all candidates (step B.2.a),
 	// divided by one more than the number of seats to be filled,
 	// truncated to 9 decimal places, plus 0.000000001 (1/109).
-	elected := round.candidates.countState(Elected)
+	// elected := round.candidates.countState(Elected)
 	totvotes := round.candidates.countVotes()
-	threshold := totvotes / (1.0 + float64(el.Seats) - float64(elected))
+	threshold := totvotes / (1.0 + float64(el.Seats))
 	fmt.Printf("threshold %.02f (%.02f)\n", threshold, threshold/totvotes*100)
 	round.threshold = threshold
 
