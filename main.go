@@ -10,17 +10,21 @@ import (
 )
 
 func main() {
-	f, err := os.Open("election13.txt")
+	f, err := os.Open("testdata/election14.txt")
 	if err != nil {
 		panic(err)
 	}
 
 	data := election.Read(f)
-	elected := meekstv.Count(data)
+	report := meekstv.Count(data)
+
+	elected := report.Results()
 
 	sort.Slice(elected, func(i, j int) bool {
 		return elected[i].Votes >= elected[j].Votes
 	})
+
+	elected = elected[:data.Seats]
 
 	fmt.Println("-------------------------")
 	fmt.Printf("Results of %s\n", data.Title)

@@ -1,0 +1,384 @@
+{
+  "n_seats": 2,
+  "n_votes": 30520,
+  "title": "Stack Overflow Moderator Election 2019",
+  "precision": 6,
+  "withdrawn": [],
+  "method": "Meek STV",
+  "version": "1.0",
+  "candidates": [
+    "Josh Caswell",
+    "Sterling Archer",
+    "Travis J",
+    "Makoto",
+    "Machavity",
+    "Baum mit Augen",
+    "Makyen",
+    "coldspeed",
+    "Zoe",
+    "Jean-François Fabre"
+  ],
+  "winners": [
+    5,
+    9
+  ],
+  "tie_breaks": [],
+  "options": [
+    [
+      "prec",
+      6
+    ],
+    [
+      "thresholdFormula",
+      "Droop"
+    ],
+    [
+      "dynamicThreshold",
+      "Dynamic"
+    ],
+    [
+      "fractionalThreshold",
+      "Fractional"
+    ],
+    [
+      "weakTieBreakMethod",
+      "Backward"
+    ],
+    [
+      "removeOvervotes",
+      "Skip"
+    ],
+    [
+      "removeUndervotes",
+      "Skip"
+    ]
+  ],
+  "rounds": [
+    {
+      "count": [
+        4474000000,
+        1252000000,
+        1859000000,
+        2475000000,
+        2062000000,
+        4556000000,
+        2461000000,
+        3663000000,
+        3372000000,
+        4346000000
+      ],
+      "surplus": 0,
+      "exhausted": 0,
+      "continuing": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "n": 1,
+      "msg": "Count of first choices. ",
+      "winners": [],
+      "losers": [],
+      "action": {
+        "type": "first",
+        "desc": "Count of first choices. "
+      },
+      "thresh": 10173333334
+    },
+    {
+      "count": [
+        4659000000,
+        0,
+        2000000000,
+        2570000000,
+        2177000000,
+        4678000000,
+        2555000000,
+        3780000000,
+        3543000000,
+        4502000000
+      ],
+      "surplus": 0,
+      "exhausted": 56000000,
+      "continuing": [
+        0,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "n": 2,
+      "msg": "Count after eliminating Sterling Archer and transferring votes. All losing candidates are eliminated. ",
+      "winners": [],
+      "losers": [
+        1
+      ],
+      "action": {
+        "type": "eliminate",
+        "candidates": [
+          1
+        ],
+        "desc": "All losing candidates are eliminated. "
+      },
+      "thresh": 10154666667
+    },
+    {
+      "count": [
+        4970000000,
+        0,
+        0,
+        2840000000,
+        2348000000,
+        4930000000,
+        2756000000,
+        4013000000,
+        3780000000,
+        4731000000
+      ],
+      "surplus": 0,
+      "exhausted": 152000000,
+      "continuing": [
+        0,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "n": 3,
+      "msg": "Count after eliminating Travis J and transferring votes. All losing candidates are eliminated. ",
+      "winners": [],
+      "losers": [
+        1,
+        2
+      ],
+      "action": {
+        "type": "eliminate",
+        "candidates": [
+          2
+        ],
+        "desc": "All losing candidates are eliminated. "
+      },
+      "thresh": 10122666667
+    },
+    {
+      "count": [
+        5252000000,
+        0,
+        0,
+        3098000000,
+        0,
+        5307000000,
+        3157000000,
+        4292000000,
+        4005000000,
+        5067000000
+      ],
+      "surplus": 0,
+      "exhausted": 342000000,
+      "continuing": [
+        0,
+        3,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "n": 4,
+      "msg": "Count after eliminating Machavity and transferring votes. All losing candidates are eliminated. ",
+      "winners": [],
+      "losers": [
+        1,
+        2,
+        4
+      ],
+      "action": {
+        "type": "eliminate",
+        "candidates": [
+          4
+        ],
+        "desc": "All losing candidates are eliminated. "
+      },
+      "thresh": 10059333334
+    },
+    {
+      "count": [
+        5887000000,
+        0,
+        0,
+        0,
+        0,
+        5836000000,
+        3562000000,
+        4725000000,
+        4303000000,
+        5450000000
+      ],
+      "surplus": 0,
+      "exhausted": 757000000,
+      "continuing": [
+        0,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "n": 5,
+      "msg": "Count after eliminating Makoto and transferring votes. All losing candidates are eliminated. ",
+      "winners": [],
+      "losers": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "action": {
+        "type": "eliminate",
+        "candidates": [
+          3
+        ],
+        "desc": "All losing candidates are eliminated. "
+      },
+      "thresh": 9921000001
+    },
+    {
+      "count": [
+        6398000000,
+        0,
+        0,
+        0,
+        0,
+        6481000000,
+        0,
+        5338000000,
+        4763000000,
+        5983000000
+      ],
+      "surplus": 0,
+      "exhausted": 1557000000,
+      "continuing": [
+        0,
+        5,
+        7,
+        8,
+        9
+      ],
+      "n": 6,
+      "msg": "Count after eliminating Makyen and transferring votes. All losing candidates are eliminated. ",
+      "winners": [],
+      "losers": [
+        1,
+        2,
+        3,
+        4,
+        6
+      ],
+      "action": {
+        "type": "eliminate",
+        "candidates": [
+          6
+        ],
+        "desc": "All losing candidates are eliminated. "
+      },
+      "thresh": 9654333334
+    },
+    {
+      "count": [
+        7013000000,
+        0,
+        0,
+        0,
+        0,
+        7323000000,
+        0,
+        6062000000,
+        0,
+        7003000000
+      ],
+      "surplus": 0,
+      "exhausted": 3119000000,
+      "continuing": [
+        0,
+        9,
+        5,
+        7
+      ],
+      "n": 7,
+      "msg": "Count after eliminating Zoe and transferring votes. All losing candidates are eliminated. ",
+      "winners": [],
+      "losers": [
+        1,
+        2,
+        3,
+        4,
+        6,
+        8
+      ],
+      "action": {
+        "type": "eliminate",
+        "candidates": [
+          8
+        ],
+        "desc": "All losing candidates are eliminated. "
+      },
+      "thresh": 9133666667
+    },
+    {
+      "count": [
+        7958000000,
+        0,
+        0,
+        0,
+        0,
+        8364000000,
+        0,
+        0,
+        0,
+        8253000000
+      ],
+      "surplus": 233666666,
+      "exhausted": 5945000000,
+      "continuing": [
+        0
+      ],
+      "n": 8,
+      "msg": "Count after eliminating coldspeed and transferring votes. All losing candidates are eliminated. Candidates Baum mit Augen and Jean-François Fabre have reached the threshold and are elected. ",
+      "winners": [
+        9,
+        5
+      ],
+      "losers": [
+        1,
+        2,
+        3,
+        4,
+        6,
+        7,
+        8
+      ],
+      "action": {
+        "type": "eliminate",
+        "candidates": [
+          7
+        ],
+        "desc": "All losing candidates are eliminated. "
+      },
+      "thresh": 8191666667
+    }
+  ],
+  "n_valid_votes": 30520
+}

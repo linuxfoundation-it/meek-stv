@@ -1,0 +1,226 @@
+{
+  "n_seats": 2,
+  "n_votes": 32224,
+  "title": "Stack Overflow Moderator Election 2020",
+  "precision": 6,
+  "withdrawn": [
+    6
+  ],
+  "method": "Meek STV",
+  "version": "1.0",
+  "candidates": [
+    "Travis J",
+    "Tschallacka",
+    "noɥʇʎԀʎzɐɹƆ",
+    "Dharman",
+    "Machavity",
+    "Makyen",
+    "Yvette"
+  ],
+  "winners": [
+    4,
+    5
+  ],
+  "tie_breaks": [],
+  "options": [
+    [
+      "prec",
+      6
+    ],
+    [
+      "thresholdFormula",
+      "Droop"
+    ],
+    [
+      "dynamicThreshold",
+      "Dynamic"
+    ],
+    [
+      "fractionalThreshold",
+      "Fractional"
+    ],
+    [
+      "weakTieBreakMethod",
+      "Backward"
+    ],
+    [
+      "removeOvervotes",
+      "Skip"
+    ],
+    [
+      "removeUndervotes",
+      "Skip"
+    ]
+  ],
+  "rounds": [
+    {
+      "count": [
+        6211000000,
+        2464000000,
+        2834000000,
+        4766000000,
+        7116000000,
+        8445000000,
+        0
+      ],
+      "surplus": 0,
+      "exhausted": 0,
+      "continuing": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "n": 1,
+      "msg": "Count of first choices. ",
+      "winners": [],
+      "losers": [],
+      "action": {
+        "type": "first",
+        "desc": "Count of first choices. "
+      },
+      "thresh": 10612000001
+    },
+    {
+      "count": [
+        6690000000,
+        0,
+        3210000000,
+        5236000000,
+        7569000000,
+        8976000000,
+        0
+      ],
+      "surplus": 0,
+      "exhausted": 155000000,
+      "continuing": [
+        0,
+        2,
+        3,
+        4,
+        5
+      ],
+      "n": 2,
+      "msg": "Count after eliminating Tschallacka and transferring votes. All losing candidates are eliminated. ",
+      "winners": [],
+      "losers": [
+        1
+      ],
+      "action": {
+        "type": "eliminate",
+        "candidates": [
+          1
+        ],
+        "desc": "All losing candidates are eliminated. "
+      },
+      "thresh": 10560333334
+    },
+    {
+      "count": [
+        7438000000,
+        0,
+        0,
+        5881000000,
+        8092000000,
+        9568000000,
+        0
+      ],
+      "surplus": 0,
+      "exhausted": 857000000,
+      "continuing": [
+        0,
+        3,
+        4,
+        5
+      ],
+      "n": 3,
+      "msg": "Count after eliminating noɥʇʎԀʎzɐɹƆ and transferring votes. All losing candidates are eliminated. ",
+      "winners": [],
+      "losers": [
+        1,
+        2
+      ],
+      "action": {
+        "type": "eliminate",
+        "candidates": [
+          2
+        ],
+        "desc": "All losing candidates are eliminated. "
+      },
+      "thresh": 10326333334
+    },
+    {
+      "count": [
+        8620000000,
+        0,
+        0,
+        0,
+        9335000000,
+        11457000000,
+        0
+      ],
+      "surplus": 1652999999,
+      "exhausted": 2424000000,
+      "continuing": [
+        0,
+        4
+      ],
+      "n": 4,
+      "msg": "Count after eliminating Dharman and transferring votes. All losing candidates are eliminated. Candidate Makyen has reached the threshold and is elected. ",
+      "winners": [
+        5
+      ],
+      "losers": [
+        1,
+        2,
+        3
+      ],
+      "action": {
+        "type": "eliminate",
+        "candidates": [
+          3
+        ],
+        "desc": "All losing candidates are eliminated. "
+      },
+      "thresh": 9804000001
+    },
+    {
+      "count": [
+        8995267078,
+        0,
+        0,
+        0,
+        9928559692,
+        9804006954,
+        0
+      ],
+      "surplus": 580677496,
+      "exhausted": 3108166276,
+      "continuing": [
+        0
+      ],
+      "n": 5,
+      "msg": "Count after transferring surplus votes. Keep factors of candidates who have exceeded the threshold: Makyen, 0.855722. Candidate Machavity has reached the threshold and is elected. ",
+      "winners": [
+        4,
+        5
+      ],
+      "losers": [
+        1,
+        2,
+        3
+      ],
+      "action": {
+        "type": "surplus",
+        "candidates": [
+          5
+        ],
+        "desc": ""
+      },
+      "thresh": 9575944575
+    }
+  ],
+  "n_valid_votes": 31836
+}

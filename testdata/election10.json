@@ -1,0 +1,602 @@
+{
+  "n_seats": 3,
+  "n_votes": 30016,
+  "title": "Stack Overflow Moderator Election 2018",
+  "precision": 6,
+  "withdrawn": [],
+  "method": "Meek STV",
+  "version": "1.0",
+  "candidates": [
+    "Brett DeWoody",
+    "Floern",
+    "Rob",
+    "Samuel Liew",
+    "vaultah",
+    "Baum mit Augen",
+    "ArtOfCode",
+    "Yvette Colomb",
+    "Jean-François Fabre",
+    "Stephen Rauch"
+  ],
+  "winners": [
+    2,
+    3,
+    7
+  ],
+  "tie_breaks": [],
+  "options": [
+    [
+      "prec",
+      6
+    ],
+    [
+      "thresholdFormula",
+      "Droop"
+    ],
+    [
+      "dynamicThreshold",
+      "Dynamic"
+    ],
+    [
+      "fractionalThreshold",
+      "Whole"
+    ],
+    [
+      "weakTieBreakMethod",
+      "Backward"
+    ],
+    [
+      "removeOvervotes",
+      "Skip"
+    ],
+    [
+      "removeUndervotes",
+      "Skip"
+    ]
+  ],
+  "rounds": [
+    {
+      "count": [
+        3546000000,
+        2389000000,
+        4386000000,
+        4232000000,
+        2566000000,
+        3050000000,
+        1431000000,
+        3768000000,
+        1685000000,
+        2963000000
+      ],
+      "surplus": 0,
+      "exhausted": 0,
+      "continuing": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "n": 1,
+      "msg": "Count of first choices. ",
+      "winners": [],
+      "losers": [],
+      "action": {
+        "type": "first",
+        "desc": "Count of first choices. "
+      },
+      "thresh": 7505000000
+    },
+    {
+      "count": [
+        3694000000,
+        2539000000,
+        4552000000,
+        4371000000,
+        2692000000,
+        3186000000,
+        0,
+        3982000000,
+        1770000000,
+        3124000000
+      ],
+      "surplus": 0,
+      "exhausted": 106000000,
+      "continuing": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        7,
+        8,
+        9
+      ],
+      "n": 2,
+      "msg": "Count after eliminating ArtOfCode and transferring votes. All losing candidates are eliminated. ",
+      "winners": [],
+      "losers": [
+        6
+      ],
+      "action": {
+        "type": "eliminate",
+        "candidates": [
+          6
+        ],
+        "desc": "All losing candidates are eliminated. "
+      },
+      "thresh": 7478000000
+    },
+    {
+      "count": [
+        3926000000,
+        2695000000,
+        4733000000,
+        4651000000,
+        2871000000,
+        3384000000,
+        0,
+        4231000000,
+        0,
+        3339000000
+      ],
+      "surplus": 0,
+      "exhausted": 186000000,
+      "continuing": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        7,
+        9
+      ],
+      "n": 3,
+      "msg": "Count after eliminating Jean-François Fabre and transferring votes. All losing candidates are eliminated. ",
+      "winners": [],
+      "losers": [
+        8,
+        6
+      ],
+      "action": {
+        "type": "eliminate",
+        "candidates": [
+          8
+        ],
+        "desc": "All losing candidates are eliminated. "
+      },
+      "thresh": 7458000000
+    },
+    {
+      "count": [
+        4398000000,
+        0,
+        5117000000,
+        5045000000,
+        3136000000,
+        3687000000,
+        0,
+        4591000000,
+        0,
+        3675000000
+      ],
+      "surplus": 0,
+      "exhausted": 367000000,
+      "continuing": [
+        0,
+        2,
+        3,
+        4,
+        5,
+        7,
+        9
+      ],
+      "n": 4,
+      "msg": "Count after eliminating Floern and transferring votes. All losing candidates are eliminated. ",
+      "winners": [],
+      "losers": [
+        8,
+        1,
+        6
+      ],
+      "action": {
+        "type": "eliminate",
+        "candidates": [
+          1
+        ],
+        "desc": "All losing candidates are eliminated. "
+      },
+      "thresh": 7413000000
+    },
+    {
+      "count": [
+        4839000000,
+        0,
+        5599000000,
+        5562000000,
+        0,
+        4087000000,
+        0,
+        5007000000,
+        0,
+        4169000000
+      ],
+      "surplus": 0,
+      "exhausted": 753000000,
+      "continuing": [
+        0,
+        2,
+        3,
+        5,
+        7,
+        9
+      ],
+      "n": 5,
+      "msg": "Count after eliminating vaultah and transferring votes. All losing candidates are eliminated. ",
+      "winners": [],
+      "losers": [
+        8,
+        1,
+        4,
+        6
+      ],
+      "action": {
+        "type": "eliminate",
+        "candidates": [
+          4
+        ],
+        "desc": "All losing candidates are eliminated. "
+      },
+      "thresh": 7316000000
+    },
+    {
+      "count": [
+        5382000000,
+        0,
+        6314000000,
+        6325000000,
+        0,
+        0,
+        0,
+        5609000000,
+        0,
+        4797000000
+      ],
+      "surplus": 0,
+      "exhausted": 1589000000,
+      "continuing": [
+        0,
+        2,
+        3,
+        7,
+        9
+      ],
+      "n": 6,
+      "msg": "Count after eliminating Baum mit Augen and transferring votes. All losing candidates are eliminated. ",
+      "winners": [],
+      "losers": [
+        8,
+        1,
+        4,
+        5,
+        6
+      ],
+      "action": {
+        "type": "eliminate",
+        "candidates": [
+          5
+        ],
+        "desc": "All losing candidates are eliminated. "
+      },
+      "thresh": 7107000000
+    },
+    {
+      "count": [
+        6179000000,
+        0,
+        7086000000,
+        7192000000,
+        0,
+        0,
+        0,
+        6266000000,
+        0,
+        0
+      ],
+      "surplus": 916000000,
+      "exhausted": 3293000000,
+      "continuing": [
+        0,
+        7
+      ],
+      "n": 7,
+      "msg": "Count after eliminating Stephen Rauch and transferring votes. All losing candidates are eliminated. Candidates Rob and Samuel Liew have reached the threshold and are elected. ",
+      "winners": [
+        2,
+        3
+      ],
+      "losers": [
+        1,
+        4,
+        5,
+        6,
+        8,
+        9
+      ],
+      "action": {
+        "type": "eliminate",
+        "candidates": [
+          9
+        ],
+        "desc": "All losing candidates are eliminated. "
+      },
+      "thresh": 6681000000
+    },
+    {
+      "count": [
+        6338378566,
+        0,
+        6791942446,
+        6772958545,
+        0,
+        0,
+        0,
+        6386306602,
+        0,
+        0
+      ],
+      "surplus": 418900991,
+      "exhausted": 3726413841,
+      "continuing": [
+        0,
+        7
+      ],
+      "n": 8,
+      "msg": "Count after transferring surplus votes. Keep factors of candidates who have exceeded the threshold: Rob, 0.942846 and Samuel Liew, 0.928949. ",
+      "winners": [
+        2,
+        3
+      ],
+      "losers": [
+        1,
+        4,
+        5,
+        6,
+        8,
+        9
+      ],
+      "action": {
+        "type": "surplus",
+        "candidates": [
+          2,
+          3
+        ],
+        "desc": ""
+      },
+      "thresh": 6573000000
+    },
+    {
+      "count": [
+        6410484006,
+        0,
+        6614441377,
+        6620459957,
+        0,
+        0,
+        0,
+        6441413921,
+        0,
+        0
+      ],
+      "surplus": 190901334,
+      "exhausted": 3929200739,
+      "continuing": [
+        0,
+        7
+      ],
+      "n": 9,
+      "msg": "Count after transferring surplus votes. Keep factors of candidates who have exceeded the threshold: Rob, 0.912453 and Samuel Liew, 0.901524. ",
+      "winners": [
+        2,
+        3
+      ],
+      "losers": [
+        1,
+        4,
+        5,
+        6,
+        8,
+        9
+      ],
+      "action": {
+        "type": "surplus",
+        "candidates": [
+          2,
+          3
+        ],
+        "desc": ""
+      },
+      "thresh": 6522000000
+    },
+    {
+      "count": [
+        6443373248,
+        0,
+        6541976311,
+        6541619255,
+        0,
+        0,
+        0,
+        6466346043,
+        0,
+        0
+      ],
+      "surplus": 85595566,
+      "exhausted": 4022685143,
+      "continuing": [
+        0,
+        7
+      ],
+      "n": 10,
+      "msg": "Count after transferring surplus votes. Keep factors of candidates who have exceeded the threshold: Rob, 0.899701 and Samuel Liew, 0.888117. ",
+      "winners": [
+        2,
+        3
+      ],
+      "losers": [
+        1,
+        4,
+        5,
+        6,
+        8,
+        9
+      ],
+      "action": {
+        "type": "surplus",
+        "candidates": [
+          2,
+          3
+        ],
+        "desc": ""
+      },
+      "thresh": 6499000000
+    },
+    {
+      "count": [
+        6458086024,
+        0,
+        6507567018,
+        6508032858,
+        0,
+        0,
+        0,
+        6477530335,
+        0,
+        0
+      ],
+      "surplus": 39599876,
+      "exhausted": 4064783765,
+      "continuing": [
+        0,
+        7
+      ],
+      "n": 11,
+      "msg": "Count after transferring surplus votes. Keep factors of candidates who have exceeded the threshold: Rob, 0.893791 and Samuel Liew, 0.882331. ",
+      "winners": [
+        2,
+        3
+      ],
+      "losers": [
+        1,
+        4,
+        5,
+        6,
+        8,
+        9
+      ],
+      "action": {
+        "type": "surplus",
+        "candidates": [
+          2,
+          3
+        ],
+        "desc": ""
+      },
+      "thresh": 6488000000
+    },
+    {
+      "count": [
+        6464892664,
+        0,
+        6492009787,
+        6492100773,
+        0,
+        0,
+        0,
+        6482695935,
+        0,
+        0
+      ],
+      "surplus": 18110560,
+      "exhausted": 4084300841,
+      "continuing": [
+        0,
+        7
+      ],
+      "n": 12,
+      "msg": "Count after transferring surplus votes. Keep factors of candidates who have exceeded the threshold: Rob, 0.891104 and Samuel Liew, 0.879616. ",
+      "winners": [
+        2,
+        3
+      ],
+      "losers": [
+        1,
+        4,
+        5,
+        6,
+        8,
+        9
+      ],
+      "action": {
+        "type": "surplus",
+        "candidates": [
+          2,
+          3
+        ],
+        "desc": ""
+      },
+      "thresh": 6483000000
+    },
+    {
+      "count": [
+        6468003942,
+        0,
+        6484822062,
+        6484880884,
+        0,
+        0,
+        0,
+        6485058281,
+        0,
+        0
+      ],
+      "surplus": 11761227,
+      "exhausted": 4093234831,
+      "continuing": [
+        0
+      ],
+      "n": 13,
+      "msg": "Count after transferring surplus votes. Keep factors of candidates who have exceeded the threshold: Rob, 0.889868 and Samuel Liew, 0.878383. Candidate Yvette Colomb has reached the threshold and is elected. ",
+      "winners": [
+        2,
+        3,
+        7
+      ],
+      "losers": [
+        1,
+        4,
+        5,
+        6,
+        8,
+        9
+      ],
+      "action": {
+        "type": "surplus",
+        "candidates": [
+          2,
+          3
+        ],
+        "desc": ""
+      },
+      "thresh": 6481000000
+    }
+  ],
+  "n_valid_votes": 30016
+}

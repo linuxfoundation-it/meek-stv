@@ -7,7 +7,7 @@ import (
 	"github.com/blackgreen100/meek-stv/election"
 )
 
-func Count(params *election.Election) Candidates {
+func Count(params *election.Election) Log {
 	// Initialize Election
 	getInitialState := func(i int) CandidateState {
 		if params.Withdrawn[i] {
@@ -45,12 +45,20 @@ func Count(params *election.Election) Candidates {
 		hopeful := cs.countState(Hopeful)
 		elected := cs.countState(Elected)
 		if elected >= params.Seats || elected+hopeful <= params.Seats {
-			return round.complete(params.Seats)
+			round.complete(params.Seats)
+			return round.report
 		}
 		fmt.Println("round", round.n+1)
+		round.report.add(round.n)
 		round.run(params)
 		fmt.Println("-------------------------")
 		// Continue. Proceed to the next round at step B.1.
+
+		// failsafe in case bugs prevent the loop from exiting
+		if round.n >= 50 {
+			round.complete(params.Seats)
+			return round.report
+		}
 	}
 }
 
@@ -61,15 +69,16 @@ type meekStvRound struct {
 	omega       float64
 	threshold   float64
 	prevSurplus float64
+	report      Log
 }
 
 func (round *meekStvRound) run(el *election.Election) {
 	newlyElected := false
 
 	round.candidates.resetVotes()
-	// iterate
+
 	// Distribute votes.
-	// For each ballot: set ballot weight w to 1, and then for each candidate, in order of rank on that ballot:
+	// For each candidate, in order of rank on that ballot:
 	// add w multiplied by the keep factor kf of the candidate (to 9 decimal places, rounded up)
 	// to that candidate’s vote v, and reduce w by the same amount, until no further candidate remains
 	// on the ballot or until the ballot’s weight w is 0.
@@ -90,6 +99,9 @@ func (round *meekStvRound) run(el *election.Election) {
 			exhausted += w
 		}
 	}
+	entry := round.report.last()
+	entry.Exhausted = exhausted
+
 	// TODO add debug statements
 	// fmt.Println("vote counts")
 	// for _, c := range round.candidates {
@@ -105,6 +117,7 @@ func (round *meekStvRound) run(el *election.Election) {
 	threshold := totvotes / (1.0 + float64(el.Seats))
 	fmt.Printf("threshold %.02f (%.02f)\n", threshold, threshold/totvotes*100)
 	round.threshold = threshold
+	entry.Threshold = threshold
 
 	// Find winners. Elect each hopeful candidate with a vote v greater than or equal to the quota (v ≥ q).
 	for _, c := range round.candidates {
@@ -119,6 +132,7 @@ func (round *meekStvRound) run(el *election.Election) {
 			c.KeepFactor = (c.KeepFactor * round.threshold) / c.Votes
 		}
 	}
+	entry.CandidateSnapshot = round.snapshot()
 
 	// Calculate the total surplus s, as the sum of the individual surpluses (v – q) of the elected candidates,
 	// but not less than 0.
@@ -162,6 +176,14 @@ func (round *meekStvRound) run(el *election.Election) {
 // tiebreaking
 // Ties can arise in B.3, when selecting a candidate for defeat.
 // Use the defined tiebreaking procedure to select for defeat one candidate from the group of tied candidates.
+
+func (round *meekStvRound) snapshot() []Candidate {
+	snap := make([]Candidate, len(round.candidates))
+	for i, c := range round.candidates {
+		snap[i] = *c
+	}
+	return snap
+}
 
 func (round *meekStvRound) complete(seats int) Candidates {
 	// Elect remaining. If any seats are unfilled, elect remaining hopeful candidates.
