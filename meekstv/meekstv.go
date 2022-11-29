@@ -1,7 +1,6 @@
 package meekstv
 
 import (
-	"fmt"
 	"math"
 
 	"github.com/blackgreen100/meek-stv/election"
@@ -48,11 +47,8 @@ func Count(params *election.Election) Log {
 			round.complete(params.Seats)
 			return round.report
 		}
-		fmt.Println("round", round.n+1)
 		round.report.add(round.n)
 		round.run(params)
-		fmt.Println("-------------------------")
-		// Continue. Proceed to the next round at step B.1.
 
 		// failsafe in case bugs prevent the loop from exiting
 		if round.n >= 50 {
@@ -99,40 +95,39 @@ func (round *meekStvRound) run(input *election.Election) {
 			exhausted += w
 		}
 	}
-	entry := round.report.last()
-	entry.Exhausted = exhausted - float64(input.CountEmpty())
+	// get log entry
+	roundLog := round.report.last()
 
-	// TODO add debug statements
-	// fmt.Println("vote counts")
-	// for _, c := range round.candidates {
-	// 	fmt.Println(c.Name, c.Votes)
-	// }
-	// fmt.Println("<exhausted>", exhausted)
+	// log
+	roundLog.Exhausted = exhausted - float64(input.CountEmpty())
 
 	// Update quota. Set quota q to the sum of the vote v for all candidates (step B.2.a),
 	// divided by one more than the number of seats to be filled,
 	// truncated to 9 decimal places, plus 0.000000001 (1/109).
-	// elected := round.candidates.countState(Elected)
 	totvotes := round.candidates.countVotes()
 	threshold := totvotes / (1.0 + float64(input.Seats))
-	fmt.Printf("threshold %.02f (%.02f)\n", threshold, threshold/totvotes*100)
 	round.threshold = threshold
-	entry.Threshold = threshold
+
+	// log
+	roundLog.Threshold = threshold
+	roundLog.TotVotes = totvotes
 
 	// Find winners. Elect each hopeful candidate with a vote v greater than or equal to the quota (v ≥ q).
 	for _, c := range round.candidates {
-		if c.Votes >= round.threshold {
+		if c.Votes >= round.threshold && c.State != Elected {
 			c.State = Elected
 			newlyElected = true
-			fmt.Printf("elected %s with %.02f votes\n", c.Name, c.Votes)
 
 			// Update keep factors. Set the keep factor kf of each elected candidate to the candidate’s
 			// current keep factor kf, multiplied by the current quota q (to 9 decimal places, rounded up),
 			// and then divided by the candidate’s current vote v (to 9 decimal places, rounded up).
 			c.KeepFactor = (c.KeepFactor * round.threshold) / c.Votes
+
+			// log
+			roundLog.Elected = append(roundLog.Elected, *c)
 		}
 	}
-	entry.CandidateSnapshot = round.snapshot()
+	roundLog.CandidateSnapshot = round.snapshot()
 
 	// Calculate the total surplus s, as the sum of the individual surpluses (v – q) of the elected candidates,
 	// but not less than 0.
@@ -166,7 +161,9 @@ func (round *meekStvRound) run(input *election.Election) {
 	}
 	d.State = Defeated
 	d.KeepFactor = 0.0
-	fmt.Println("eliminating", d.Name)
+
+	// log
+	roundLog.Defeated = append(roundLog.Defeated, *d)
 
 	// Continue. Proceed to the next round at step B.1.
 	round.prevSurplus = totSurplus

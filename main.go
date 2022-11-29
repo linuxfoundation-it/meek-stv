@@ -18,12 +18,12 @@ func main() {
 	data := election.Read(f)
 	report := meekstv.Count(data)
 
-	elected := report.Results()
+	report.Print()
 
+	elected := report.Results()
 	sort.Slice(elected, func(i, j int) bool {
 		return elected[i].Votes >= elected[j].Votes
 	})
-
 	elected = elected[:data.Seats]
 
 	fmt.Println("-------------------------")
