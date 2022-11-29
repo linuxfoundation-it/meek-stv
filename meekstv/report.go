@@ -2,7 +2,6 @@ package meekstv
 
 import (
 	"fmt"
-	"sort"
 )
 
 type Log struct {
@@ -21,17 +20,15 @@ func (l *Log) Round(i int) *LogEntry {
 }
 
 func (l *Log) Results() []Candidate {
-	return l.entries[len(l.entries)-1].CandidateSnapshot
+	return l.last().CandidateSnapshot
 }
 
-func (l *Log) Winners(seats int) []int {
-	cs := l.last().CandidateSnapshot
-	sort.Slice(cs, func(i, j int) bool {
-		return cs[i].Votes > cs[j].Votes
-	})
-	out := make([]int, seats)
-	for i := 0; i < seats; i++ {
-		out[i] = cs[i].Index
+func (l *Log) Winners() []int {
+	out := make([]int, 0)
+	for _, c := range l.Results() {
+		if c.State == Elected {
+			out = append(out, c.Index)
+		}
 	}
 	return out
 }

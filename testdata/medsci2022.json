@@ -1,0 +1,220 @@
+{
+  "n_seats": 2,
+  "n_votes": 72,
+  "title": "Medical Sciences Stack Exchange Moderator Election 2022",
+  "precision": 6,
+  "withdrawn": [],
+  "method": "Meek STV",
+  "version": "1.0",
+  "candidates": [
+    "Shadow Wizard Hates Omicron",
+    "larry909",
+    "JMP",
+    "Bryan Krause",
+    "motosubatsu",
+    "Ian Campbell"
+  ],
+  "winners": [
+    3,
+    5
+  ],
+  "tie_breaks": [],
+  "options": [
+    [
+      "prec",
+      6
+    ],
+    [
+      "thresholdFormula",
+      "Droop"
+    ],
+    [
+      "dynamicThreshold",
+      "Dynamic"
+    ],
+    [
+      "fractionalThreshold",
+      "Fractional"
+    ],
+    [
+      "weakTieBreakMethod",
+      "Backward"
+    ],
+    [
+      "removeOvervotes",
+      "Skip"
+    ],
+    [
+      "removeUndervotes",
+      "Skip"
+    ]
+  ],
+  "rounds": [
+    {
+      "count": [
+        6000000,
+        1000000,
+        3000000,
+        47000000,
+        2000000,
+        13000000
+      ],
+      "surplus": 22999999,
+      "exhausted": 0,
+      "continuing": [
+        0,
+        1,
+        2,
+        4,
+        5
+      ],
+      "n": 1,
+      "msg": "Count of first choices. Candidate Bryan Krause has reached the threshold and is elected. ",
+      "winners": [
+        3
+      ],
+      "losers": [],
+      "action": {
+        "type": "first",
+        "desc": "Count of first choices. "
+      },
+      "thresh": 24000001
+    },
+    {
+      "count": [
+        7468083,
+        1000000,
+        9361693,
+        24000033,
+        5914888,
+        20829776
+      ],
+      "surplus": 1141875,
+      "exhausted": 3425527,
+      "continuing": [
+        0,
+        1,
+        2,
+        4,
+        5
+      ],
+      "n": 2,
+      "msg": "Count after transferring surplus votes. Keep factors of candidates who have exceeded the threshold: Bryan Krause, 0.510639. ",
+      "winners": [
+        3
+      ],
+      "losers": [],
+      "action": {
+        "type": "surplus",
+        "candidates": [
+          3
+        ],
+        "desc": ""
+      },
+      "thresh": 22858158
+    },
+    {
+      "count": [
+        7468083,
+        0,
+        9361693,
+        24510672,
+        5914888,
+        20829776
+      ],
+      "surplus": 1815634,
+      "exhausted": 3914888,
+      "continuing": [
+        0,
+        2,
+        4,
+        5
+      ],
+      "n": 3,
+      "msg": "Count after eliminating larry909 and transferring votes. All losing candidates are eliminated. ",
+      "winners": [
+        3
+      ],
+      "losers": [
+        1
+      ],
+      "action": {
+        "type": "eliminate",
+        "candidates": [
+          1
+        ],
+        "desc": "All losing candidates are eliminated. "
+      },
+      "thresh": 22695038
+    },
+    {
+      "count": [
+        7581558,
+        0,
+        9853418,
+        22695072,
+        6217488,
+        21434976
+      ],
+      "surplus": 100901,
+      "exhausted": 4217488,
+      "continuing": [
+        0,
+        2,
+        4,
+        5
+      ],
+      "n": 4,
+      "msg": "Count after transferring surplus votes. Keep factors of candidates who have exceeded the threshold: Bryan Krause, 0.472814. ",
+      "winners": [
+        3
+      ],
+      "losers": [
+        1
+      ],
+      "action": {
+        "type": "surplus",
+        "candidates": [
+          3
+        ],
+        "desc": ""
+      },
+      "thresh": 22594171
+    },
+    {
+      "count": [
+        8108744,
+        0,
+        11434976,
+        23640700,
+        0,
+        23016534
+      ],
+      "surplus": 2523264,
+      "exhausted": 5799046,
+      "continuing": [
+        0,
+        2
+      ],
+      "n": 5,
+      "msg": "Count after eliminating motosubatsu and transferring votes. All losing candidates are eliminated. Candidate Ian Campbell has reached the threshold and is elected. ",
+      "winners": [
+        3,
+        5
+      ],
+      "losers": [
+        1,
+        4
+      ],
+      "action": {
+        "type": "eliminate",
+        "candidates": [
+          4
+        ],
+        "desc": "All losing candidates are eliminated. "
+      },
+      "thresh": 22066985
+    }
+  ],
+  "n_valid_votes": 72
+}

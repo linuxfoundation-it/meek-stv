@@ -183,20 +183,21 @@ func (round *meekStvRound) snapshot() []Candidate {
 }
 
 func (round *meekStvRound) complete(seats int) Candidates {
-	// Elect remaining. If any seats are unfilled, elect remaining hopeful candidates.
 	elected := round.candidates.countState(Elected)
-	if elected < seats {
-		for _, c := range round.candidates {
-			if c.State == Hopeful {
-				c.State = Elected
-			}
+	candidates := round.candidates
+
+	// Elect remaining. If any seats are unfilled, elect remaining hopeful candidates.
+	for i := 0; elected < seats && i < len(candidates); i++ {
+		if candidates[i].State == Hopeful {
+			candidates[i].State = Elected
+			elected++
 		}
 	}
 
 	// Defeat remaining. Otherwise defeat remaining hopeful candidates.
-	for _, c := range round.candidates {
-		if c.State != Elected {
-			c.State = Defeated
+	for i := 0; i < len(candidates); i++ {
+		if candidates[i].State != Elected {
+			candidates[i].State = Defeated
 		}
 	}
 

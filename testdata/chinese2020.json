@@ -1,0 +1,179 @@
+{
+  "n_seats": 3,
+  "n_votes": 104,
+  "title": "Chinese Language Stack Exchange Moderator Election 2020",
+  "precision": 6,
+  "withdrawn": [],
+  "method": "Meek STV",
+  "version": "1.0",
+  "candidates": [
+    "Don Kirkby",
+    "Mo.",
+    "Becky 李蓓",
+    "Tang Ho",
+    "dROOOze"
+  ],
+  "winners": [
+    1,
+    2,
+    3
+  ],
+  "tie_breaks": [],
+  "options": [
+    [
+      "prec",
+      6
+    ],
+    [
+      "thresholdFormula",
+      "Droop"
+    ],
+    [
+      "dynamicThreshold",
+      "Dynamic"
+    ],
+    [
+      "fractionalThreshold",
+      "Fractional"
+    ],
+    [
+      "weakTieBreakMethod",
+      "Backward"
+    ],
+    [
+      "removeOvervotes",
+      "Skip"
+    ],
+    [
+      "removeUndervotes",
+      "Skip"
+    ]
+  ],
+  "rounds": [
+    {
+      "count": [
+        16000000,
+        24000000,
+        17000000,
+        29000000,
+        18000000
+      ],
+      "surplus": 2999999,
+      "exhausted": 0,
+      "continuing": [
+        0,
+        1,
+        2,
+        4
+      ],
+      "n": 1,
+      "msg": "Count of first choices. Candidate Tang Ho has reached the threshold and is elected. ",
+      "winners": [
+        3
+      ],
+      "losers": [],
+      "action": {
+        "type": "first",
+        "desc": "Count of first choices. "
+      },
+      "thresh": 26000001
+    },
+    {
+      "count": [
+        16413792,
+        24931032,
+        18241376,
+        26000008,
+        18206896
+      ],
+      "surplus": 51731,
+      "exhausted": 206896,
+      "continuing": [
+        0,
+        1,
+        2,
+        4
+      ],
+      "n": 2,
+      "msg": "Count after transferring surplus votes. Keep factors of candidates who have exceeded the threshold: Tang Ho, 0.896552. ",
+      "winners": [
+        3
+      ],
+      "losers": [],
+      "action": {
+        "type": "surplus",
+        "candidates": [
+          3
+        ],
+        "desc": ""
+      },
+      "thresh": 25948277
+    },
+    {
+      "count": [
+        0,
+        31448272,
+        22448272,
+        30482768,
+        19413792
+      ],
+      "surplus": 10034486,
+      "exhausted": 206896,
+      "continuing": [
+        2,
+        4
+      ],
+      "n": 3,
+      "msg": "Count after eliminating Don Kirkby and transferring votes. All losing candidates are eliminated. Candidate Mo. has reached the threshold and is elected. ",
+      "winners": [
+        1,
+        3
+      ],
+      "losers": [
+        0
+      ],
+      "action": {
+        "type": "eliminate",
+        "candidates": [
+          0
+        ],
+        "desc": "All losing candidates are eliminated. "
+      },
+      "thresh": 25948277
+    },
+    {
+      "count": [
+        0,
+        27488877,
+        27012366,
+        26615657,
+        21387796
+      ],
+      "surplus": 4238375,
+      "exhausted": 1495304,
+      "continuing": [
+        4
+      ],
+      "n": 4,
+      "msg": "Count after transferring surplus votes. Keep factors of candidates who have exceeded the threshold: Mo., 0.825110 and Tang Ho, 0.763185. Candidate Becky 李蓓 has reached the threshold and is elected. ",
+      "winners": [
+        1,
+        2,
+        3
+      ],
+      "losers": [
+        0
+      ],
+      "action": {
+        "type": "surplus",
+        "candidates": [
+          1,
+          3
+        ],
+        "desc": ""
+      },
+      "thresh": 25626175
+    }
+  ],
+  "n_valid_votes": 104
+}
