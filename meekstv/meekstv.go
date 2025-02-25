@@ -45,7 +45,7 @@ func Count(params *election.Election) Log {
 		elected := cs.countState(Elected)
 		if elected >= params.Seats || elected+hopeful <= params.Seats {
 			round.complete(params.Seats)
-			// ITX: make sure to log the last round snapshot before returning
+			// Make sure to log the last round snapshot before returning
 			// Found edge case where the last round was not being logged when a hopeful candidate was elected
 			roundLog := round.report.last()
 			roundLog.CandidateSnapshot = round.snapshot()
