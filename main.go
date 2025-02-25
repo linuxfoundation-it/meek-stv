@@ -5,8 +5,8 @@ import (
 	"os"
 	"sort"
 
-	"github.com/blackgreen100/meek-stv/election"
-	"github.com/blackgreen100/meek-stv/meekstv"
+	"github.com/linuxfoundation-it/meek-stv/election"
+	"github.com/linuxfoundation-it/meek-stv/meekstv"
 )
 
 func main() {

@@ -1,2 +1,5 @@
 .idea/
 _tool/
+
+# Ignore the binary generated from go build
+meek-stv

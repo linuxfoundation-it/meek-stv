@@ -3,7 +3,7 @@ package meekstv
 import (
 	"math"
 
-	"github.com/blackgreen100/meek-stv/election"
+	"github.com/linuxfoundation-it/meek-stv/election"
 )
 
 func Count(params *election.Election) Log {
