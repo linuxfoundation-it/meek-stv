@@ -6,7 +6,7 @@ import (
 	"os"
 	"testing"
 
-	"github.com/blackgreen100/meek-stv/election"
+	"github.com/linuxfoundation-it/meek-stv/election"
 	"github.com/stretchr/testify/assert"
 )
 
