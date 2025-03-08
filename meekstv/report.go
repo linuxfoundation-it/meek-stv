@@ -2,6 +2,7 @@ package meekstv
 
 import (
 	"fmt"
+	"strings"
 )
 
 type Log struct {
@@ -46,6 +47,25 @@ func (l *Log) Print() {
 		}
 		fmt.Println("-------------------------")
 	}
+}
+
+func (l *Log) PrintString() string {
+	var result strings.Builder
+
+	for _, e := range l.entries {
+		result.WriteString(fmt.Sprintf("Round %d:\n", e.Round))
+		result.WriteString(fmt.Sprintf("Threshold: %.02f (%.02f%%)\n", e.Threshold, e.Threshold/e.TotVotes*100))
+
+		for _, elected := range e.Elected {
+			result.WriteString(fmt.Sprintf("Elected: %s with %.02f votes\n", elected.Name, elected.Votes))
+		}
+		for _, defeated := range e.Defeated {
+			result.WriteString(fmt.Sprintf("Eliminated: %s\n", defeated.Name))
+		}
+		result.WriteString("-------------------------\n")
+	}
+
+	return result.String()
 }
 
 func (l *Log) add(round int) {
