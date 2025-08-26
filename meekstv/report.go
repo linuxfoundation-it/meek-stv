@@ -103,9 +103,8 @@ type LogEntry struct {
 	Elected                    []Candidate
 	Defeated                   []Candidate
 	Exhausted                  float64
-	TransferredSurplus         float64         // votes transferred from surplus
-	TransferredFromElimination float64         // votes transferred from eliminated candidates
-	TransferredVotes           map[int]float64 // votes transferred to each candidate in this round
+	TransferredSurplus         float64 // votes transferred from surplus
+	TransferredFromElimination float64 // votes transferred from eliminated candidates
 }
 
 func (entry *LogEntry) VotesOf(i int) float64 {
