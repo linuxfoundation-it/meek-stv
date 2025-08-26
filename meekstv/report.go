@@ -38,6 +38,16 @@ func (l *Log) Print() {
 	for _, e := range l.entries {
 		fmt.Println("round", e.Round)
 		fmt.Printf("threshold %.02f (%.02f)\n", e.Threshold, e.Threshold/e.TotVotes*100)
+		fmt.Printf("transferred surplus: %.02f\n", e.TransferredSurplus)
+		fmt.Printf("transferred from elimination: %.02f\n", e.TransferredFromElimination)
+		fmt.Printf("exhausted: %.02f\n", e.Exhausted)
+
+		// print the candidate votes in a table containing the name, keep factor, votes, and state
+		// for every round
+		fmt.Println("candidate\tkeep\tvotes")
+		for _, c := range e.CandidateSnapshot {
+			fmt.Printf("%s\t%.02f\t%.02f\n", c.Name, c.KeepFactor, c.Votes)
+		}
 
 		for _, elected := range e.Elected {
 			fmt.Printf("elected %s with %.02f votes\n", elected.Name, elected.Votes)
@@ -55,6 +65,15 @@ func (l *Log) PrintString() string {
 	for _, e := range l.entries {
 		result.WriteString(fmt.Sprintf("Round %d:\n", e.Round))
 		result.WriteString(fmt.Sprintf("Threshold: %.02f (%.02f%%)\n", e.Threshold, e.Threshold/e.TotVotes*100))
+		result.WriteString(fmt.Sprintf("Transferred surplus: %.02f\n", e.TransferredSurplus))
+		result.WriteString(fmt.Sprintf("Transferred from elimination: %.02f\n", e.TransferredFromElimination))
+		result.WriteString(fmt.Sprintf("Exhausted: %.02f\n", e.Exhausted))
+
+		// print the candidate votes in a table containing the name, keep factor, votes, and state
+		result.WriteString("candidate\tkeep\tvotes\n")
+		for _, c := range e.CandidateSnapshot {
+			result.WriteString(fmt.Sprintf("%s\t%.02f\t%.02f\n", c.Name, c.KeepFactor, c.Votes))
+		}
 
 		for _, elected := range e.Elected {
 			result.WriteString(fmt.Sprintf("Elected: %s with %.02f votes\n", elected.Name, elected.Votes))
@@ -77,13 +96,16 @@ func (l *Log) last() *LogEntry {
 }
 
 type LogEntry struct {
-	Round             int
-	Threshold         float64
-	TotVotes          float64
-	CandidateSnapshot []Candidate
-	Elected           []Candidate
-	Defeated          []Candidate
-	Exhausted         float64
+	Round                      int
+	Threshold                  float64
+	TotVotes                   float64
+	CandidateSnapshot          []Candidate
+	Elected                    []Candidate
+	Defeated                   []Candidate
+	Exhausted                  float64
+	TransferredSurplus         float64         // votes transferred from surplus
+	TransferredFromElimination float64         // votes transferred from eliminated candidates
+	TransferredVotes           map[int]float64 // votes transferred to each candidate in this round
 }
 
 func (entry *LogEntry) VotesOf(i int) float64 {

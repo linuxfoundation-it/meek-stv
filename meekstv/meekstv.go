@@ -141,6 +141,9 @@ func (round *meekStvRound) run(input *election.Election) {
 		totSurplus += c.Surplus
 	}
 
+	// Calculate transferred surplus votes
+	roundLog.TransferredSurplus = totSurplus
+
 	// Test for iteration finished. If step B.2.c elected a candidate, continue at B.1.
 	if newlyElected {
 		round.prevSurplus = totSurplus
@@ -163,6 +166,10 @@ func (round *meekStvRound) run(input *election.Election) {
 			d = c
 		}
 	}
+
+	// Log the votes of the eliminated candidate
+	roundLog.TransferredFromElimination = d.Votes
+
 	d.State = Defeated
 	d.KeepFactor = 0.0
 
