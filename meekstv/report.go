@@ -42,7 +42,7 @@ func (l *Log) Print() {
 		fmt.Printf("transferred from elimination: %.02f\n", e.TransferredFromElimination)
 		fmt.Printf("exhausted: %.02f\n", e.Exhausted)
 
-		// print the candidate votes in a table containing the name, keep factor, votes, and state
+		// print the candidate votes in a table containing the name, keep factor and votes
 		// for every round
 		fmt.Println("candidate\tkeep\tvotes")
 		for _, c := range e.CandidateSnapshot {
@@ -69,7 +69,7 @@ func (l *Log) PrintString() string {
 		result.WriteString(fmt.Sprintf("Transferred from elimination: %.02f\n", e.TransferredFromElimination))
 		result.WriteString(fmt.Sprintf("Exhausted: %.02f\n", e.Exhausted))
 
-		// print the candidate votes in a table containing the name, keep factor, votes, and state
+		// print the candidate votes in a table containing the name, keep factor and votes
 		result.WriteString("candidate\tkeep\tvotes\n")
 		for _, c := range e.CandidateSnapshot {
 			result.WriteString(fmt.Sprintf("%s\t%.02f\t%.02f\n", c.Name, c.KeepFactor, c.Votes))
