@@ -133,6 +133,46 @@ func (round *meekStvRound) run(input *election.Election) {
 	}
 	roundLog.CandidateSnapshot = round.snapshot()
 
+	// Compute transfer breakdowns relative to previous round's event
+	if len(round.report.entries) >= 2 {
+		prev := round.report.entries[len(round.report.entries)-2]
+		prevSnap := prev.CandidateSnapshot
+		curSnap := roundLog.CandidateSnapshot
+		if len(prevSnap) == len(curSnap) {
+			// If previous round elected candidate(s), attribute positive deltas as surplus receipts
+			if len(prev.Elected) > 0 {
+				m := make(map[int]float64)
+				for i := 0; i < len(curSnap); i++ {
+					delta := curSnap[i].Votes - prevSnap[i].Votes
+					if delta > 0 {
+						m[i] = delta
+					}
+				}
+				roundLog.SurplusReceived = m
+				// exhausted delta
+				roundLog.SurplusExhaustedDelta = roundLog.Exhausted - prev.Exhausted
+			}
+			// If previous round eliminated a candidate, attribute positive deltas as elimination receipts
+			if len(prev.Defeated) > 0 {
+				m := make(map[int]float64)
+				// only one defeated per round in current implementation
+				defeatedIdx := prev.Defeated[0].Index
+				for i := 0; i < len(curSnap); i++ {
+					if i == defeatedIdx {
+						continue
+					}
+					delta := curSnap[i].Votes - prevSnap[i].Votes
+					if delta > 0 {
+						m[i] = delta
+					}
+				}
+				roundLog.EliminationReceived = m
+				// exhausted delta
+				roundLog.EliminationExhaustedDelta = roundLog.Exhausted - prev.Exhausted
+			}
+		}
+	}
+
 	// Calculate the total surplus s, as the sum of the individual surpluses (v – q) of the elected candidates,
 	// but not less than 0.
 	totSurplus := 0.0
@@ -140,9 +180,6 @@ func (round *meekStvRound) run(input *election.Election) {
 		c.Surplus = math.Max(c.Votes-round.threshold, 0.0)
 		totSurplus += c.Surplus
 	}
-
-	// Calculate transferred surplus votes
-	roundLog.TransferredSurplus = totSurplus
 
 	// Test for iteration finished. If step B.2.c elected a candidate, continue at B.1.
 	if newlyElected {
@@ -166,9 +203,6 @@ func (round *meekStvRound) run(input *election.Election) {
 			d = c
 		}
 	}
-
-	// Log the votes of the eliminated candidate
-	roundLog.TransferredFromElimination = d.Votes
 
 	d.State = Defeated
 	d.KeepFactor = 0.0
