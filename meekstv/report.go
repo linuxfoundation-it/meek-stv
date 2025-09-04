@@ -34,6 +34,15 @@ func (l *Log) Winners() []int {
 	return out
 }
 
+func nameByIndex(snapshot []Candidate, idx int) string {
+	for i := range snapshot {
+		if snapshot[i].Index == idx {
+			return snapshot[i].Name
+		}
+	}
+	return fmt.Sprintf("candidate#%d", idx)
+}
+
 func (l *Log) Print() {
 	for _, e := range l.entries {
 		fmt.Println("round", e.Round)
@@ -51,7 +60,7 @@ func (l *Log) Print() {
 		if len(e.SurplusReceived) > 0 {
 			fmt.Println("surplus transfers:")
 			for idx, amt := range e.SurplusReceived {
-				name := e.CandidateSnapshot[idx].Name
+				name := nameByIndex(e.CandidateSnapshot, idx)
 				fmt.Printf("  -> %s: %.02f\n", name, amt)
 			}
 			if e.SurplusExhaustedDelta > 0 {
@@ -61,7 +70,7 @@ func (l *Log) Print() {
 		if len(e.EliminationReceived) > 0 {
 			fmt.Println("elimination transfers:")
 			for idx, amt := range e.EliminationReceived {
-				name := e.CandidateSnapshot[idx].Name
+				name := nameByIndex(e.CandidateSnapshot, idx)
 				fmt.Printf("  -> %s: %.02f\n", name, amt)
 			}
 			if e.EliminationExhaustedDelta > 0 {
@@ -97,7 +106,7 @@ func (l *Log) PrintString() string {
 		if len(e.SurplusReceived) > 0 {
 			result.WriteString("surplus transfers:\n")
 			for idx, amt := range e.SurplusReceived {
-				name := e.CandidateSnapshot[idx].Name
+				name := nameByIndex(e.CandidateSnapshot, idx)
 				result.WriteString(fmt.Sprintf("  -> %s: %.02f\n", name, amt))
 			}
 			if e.SurplusExhaustedDelta > 0 {
@@ -107,7 +116,7 @@ func (l *Log) PrintString() string {
 		if len(e.EliminationReceived) > 0 {
 			result.WriteString("elimination transfers:\n")
 			for idx, amt := range e.EliminationReceived {
-				name := e.CandidateSnapshot[idx].Name
+				name := nameByIndex(e.CandidateSnapshot, idx)
 				result.WriteString(fmt.Sprintf("  -> %s: %.02f\n", name, amt))
 			}
 			if e.EliminationExhaustedDelta > 0 {

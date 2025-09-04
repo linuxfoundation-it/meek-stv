@@ -133,43 +133,53 @@ func (round *meekStvRound) run(input *election.Election) {
 	}
 	roundLog.CandidateSnapshot = round.snapshot()
 
-	// Compute transfer breakdowns relative to previous round's event
+	// Compute transfer breakdowns relative to previous round's event using Candidate.Index keys
 	if len(round.report.entries) >= 2 {
 		prev := round.report.entries[len(round.report.entries)-2]
 		prevSnap := prev.CandidateSnapshot
 		curSnap := roundLog.CandidateSnapshot
-		if len(prevSnap) == len(curSnap) {
-			// If previous round elected candidate(s), attribute positive deltas as surplus receipts
-			if len(prev.Elected) > 0 {
-				m := make(map[int]float64)
-				for i := 0; i < len(curSnap); i++ {
-					delta := curSnap[i].Votes - prevSnap[i].Votes
+		// build maps by candidate Index
+		prevByIdx := make(map[int]Candidate, len(prevSnap))
+		curByIdx := make(map[int]Candidate, len(curSnap))
+		for i := range prevSnap {
+			prevByIdx[prevSnap[i].Index] = prevSnap[i]
+		}
+		for i := range curSnap {
+			curByIdx[curSnap[i].Index] = curSnap[i]
+		}
+		// If previous round elected candidate(s), attribute positive deltas by index
+		if len(prev.Elected) > 0 {
+			m := make(map[int]float64)
+			for idx, curC := range curByIdx {
+				if prevC, ok := prevByIdx[idx]; ok {
+					delta := curC.Votes - prevC.Votes
 					if delta > 0 {
-						m[i] = delta
+						m[idx] = delta
 					}
 				}
-				roundLog.SurplusReceived = m
-				// exhausted delta
-				roundLog.SurplusExhaustedDelta = roundLog.Exhausted - prev.Exhausted
 			}
-			// If previous round eliminated a candidate, attribute positive deltas as elimination receipts
-			if len(prev.Defeated) > 0 {
-				m := make(map[int]float64)
-				// only one defeated per round in current implementation
-				defeatedIdx := prev.Defeated[0].Index
-				for i := 0; i < len(curSnap); i++ {
-					if i == defeatedIdx {
-						continue
-					}
-					delta := curSnap[i].Votes - prevSnap[i].Votes
+			roundLog.SurplusReceived = m
+			// exhausted delta
+			roundLog.SurplusExhaustedDelta = roundLog.Exhausted - prev.Exhausted
+		}
+		// If previous round eliminated a candidate, attribute positive deltas by index
+		if len(prev.Defeated) > 0 {
+			m := make(map[int]float64)
+			defeatedIdx := prev.Defeated[0].Index
+			for idx, curC := range curByIdx {
+				if idx == defeatedIdx {
+					continue
+				}
+				if prevC, ok := prevByIdx[idx]; ok {
+					delta := curC.Votes - prevC.Votes
 					if delta > 0 {
-						m[i] = delta
+						m[idx] = delta
 					}
 				}
-				roundLog.EliminationReceived = m
-				// exhausted delta
-				roundLog.EliminationExhaustedDelta = roundLog.Exhausted - prev.Exhausted
 			}
+			roundLog.EliminationReceived = m
+			// exhausted delta
+			roundLog.EliminationExhaustedDelta = roundLog.Exhausted - prev.Exhausted
 		}
 	}
 
