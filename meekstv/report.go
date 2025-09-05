@@ -46,7 +46,7 @@ func nameByIndex(snapshot []Candidate, idx int) string {
 func (l *Log) Print() {
 	for _, e := range l.entries {
 		fmt.Println("round", e.Round)
-		fmt.Printf("threshold %.02f (%.02f)\n", e.Threshold, e.Threshold/e.TotVotes*100)
+		fmt.Printf("threshold %.02f (%.02f%%)\n", e.Threshold, e.Threshold/e.TotVotes*100)
 		fmt.Printf("exhausted: %.02f\n", e.Exhausted)
 
 		// print the candidate votes in a table containing the name, keep factor and votes
