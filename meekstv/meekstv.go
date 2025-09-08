@@ -133,6 +133,77 @@ func (round *meekStvRound) run(input *election.Election) {
 	}
 	roundLog.CandidateSnapshot = round.snapshot()
 
+	// Compute transfer breakdowns relative to previous round's event using Candidate.Index keys
+	if len(round.report.entries) >= 2 {
+		prev := round.report.entries[len(round.report.entries)-2]
+		prevSnap := prev.CandidateSnapshot
+		curSnap := roundLog.CandidateSnapshot
+		// build maps by candidate Index
+		prevByIdx := make(map[int]Candidate, len(prevSnap))
+		curByIdx := make(map[int]Candidate, len(curSnap))
+		for i := range prevSnap {
+			prevByIdx[prevSnap[i].Index] = prevSnap[i]
+		}
+		for i := range curSnap {
+			curByIdx[curSnap[i].Index] = curSnap[i]
+		}
+		// If previous round elected candidate(s), attribute positive deltas by index
+		if len(prev.Elected) > 0 {
+			m := make(map[int]float64)
+			// We measure EFFECTS, not SOURCES: after an election, surplus leaves elected
+			// candidates via reduced keep factors and flows to next preferences when
+			// ballots are re-walked. Any candidate can become a recipient of that flow.
+			//
+			// Therefore we scan ALL candidates and compute per-candidate deltas between
+			// consecutive snapshots (current - previous). We only record POSITIVE deltas
+			// as "surplus received". Elected candidates usually have NEGATIVE deltas (they
+			// shed surplus), which are naturally ignored by the > 0 filter. If multiple
+			// candidates were elected in the previous round, their combined drop is captured
+			// on the recipient side as the sum of positive deltas across all other
+			// candidates (plus any additional exhausted delta tracked separately).
+			//
+			// Important: attribution uses Candidate.Index as the stable key so that we do
+			// not depend on slice ordering of snapshots.
+			for idx, curC := range curByIdx {
+				if prevC, ok := prevByIdx[idx]; ok {
+					delta := curC.Votes - prevC.Votes
+					if delta > 0 {
+						m[idx] = delta
+					}
+				}
+			}
+			roundLog.SurplusReceived = m
+			// Track the exhausted delta separately. Together, sum(SurplusReceived) +
+			// SurplusExhaustedDelta ≈ total drop in votes across the elected candidates.
+			// this is not used in the current implementation until we allow
+			// to only rank a subset of candidates
+			roundLog.SurplusExhaustedDelta = roundLog.Exhausted - prev.Exhausted
+		}
+		// If previous round eliminated a candidate, attribute positive deltas by index
+		if len(prev.Defeated) > 0 {
+			m := make(map[int]float64)
+			defeatedIdx := prev.Defeated[0].Index
+			// For an elimination, the eliminated candidate is the SOURCE and must be
+			// excluded from recipients. There is only one eliminated candidate per round.
+			for idx, curC := range curByIdx {
+				// skip the eliminated candidate
+				if idx == defeatedIdx {
+					continue
+				}
+				if prevC, ok := prevByIdx[idx]; ok {
+					delta := curC.Votes - prevC.Votes
+					if delta > 0 {
+						m[idx] = delta
+					}
+				}
+			}
+			roundLog.EliminationReceived = m
+			// this is not used in the current implementation until we allow
+			// to only rank a subset of candidates
+			roundLog.EliminationExhaustedDelta = roundLog.Exhausted - prev.Exhausted
+		}
+	}
+
 	// Calculate the total surplus s, as the sum of the individual surpluses (v – q) of the elected candidates,
 	// but not less than 0.
 	totSurplus := 0.0
@@ -163,6 +234,7 @@ func (round *meekStvRound) run(input *election.Election) {
 			d = c
 		}
 	}
+
 	d.State = Defeated
 	d.KeepFactor = 0.0
 
