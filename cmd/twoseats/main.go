@@ -19,6 +19,12 @@ func main() {
 	runScenario([]election.Ballot{
 		{Weight: 1, Preferences: []int{0, 1}},
 	})
+
+	fmt.Println("\n== Scenario C: two ballots both selecting the same choice ==")
+	runScenario([]election.Ballot{
+		{Weight: 1, Preferences: []int{0, 1}},
+		{Weight: 1, Preferences: []int{0, 1}},
+	})
 }
 
 func runScenario(ballots []election.Ballot) {
@@ -65,11 +71,9 @@ func runScenario(ballots []election.Ballot) {
 	cands := append([]meekstv.Candidate(nil), report.Results()...)
 	sort.Slice(cands, func(i, j int) bool { return cands[i].Votes > cands[j].Votes })
 	fmt.Println("Winners:")
-	count := 0
 	for _, c := range cands {
 		if c.State == meekstv.Elected {
 			fmt.Printf("- %s (%.2f)\n", c.Name, c.Votes)
-			count++
 		}
 	}
 }
